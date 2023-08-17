@@ -1,2 +1,4 @@
-# Programacion_1_2023
-Repositorio nuevo de José y Emiliano para el proyecto Prime Praking.
+# Prime Parking
+Repositorio correspondiente a la materia Programación 1.
+Proyecto: Prime Parking
+Integrantes: José Ruti, Emiliano Muñoz.
