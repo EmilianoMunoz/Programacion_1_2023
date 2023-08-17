@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f79281a4.css",
+    "main.js": "/static/js/main.caff5143.js",
+    "static/js/787.5b5dfee8.chunk.js": "/static/js/787.5b5dfee8.chunk.js",
+    "static/media/whatsapp.png": "/static/media/whatsapp.807cf0d84060a9ee2059.png",
+    "static/media/estacion_carga.jpg": "/static/media/estacion_carga.ce97a3ceda3a467978df.jpg",
+    "static/media/lavado.jpg": "/static/media/lavado.031458b4ba872f2bbefd.jpg",
+    "static/media/parking foto.jpg": "/static/media/parking foto.bb51902154679b12aceb.jpg",
+    "static/media/instagram.png": "/static/media/instagram.c31a6f48cdb62432459c.png",
+    "static/media/cam_estacionamiento.jpg": "/static/media/cam_estacionamiento.5240eab021cc877514a5.jpg",
+    "static/media/logoname.png": "/static/media/logoname.1dd589f7351418b6e5da.png",
+    "index.html": "/index.html",
+    "main.f79281a4.css.map": "/static/css/main.f79281a4.css.map",
+    "main.caff5143.js.map": "/static/js/main.caff5143.js.map",
+    "787.5b5dfee8.chunk.js.map": "/static/js/787.5b5dfee8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f79281a4.css",
+    "static/js/main.caff5143.js"
+  ]
+}
