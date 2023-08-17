@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prime Parking</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+
+</head>
+<body style="background-color: #eee;">
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4C4F62">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img src="../media/Logo y nombre.png" width="250px" height="110px">
+        </a>
+
+        <div class="collapse navbar-collapse position-relative" id="navbarNav">
+          <ul class="navbar-nav col-md-12 position-absolute top-0 start-0">
+            <li class="nav-item rounded mx-auto d-block sm-2">
+              <a class="nav-link active" aria-current="page" href="#"><h5>Reservas</h5></a>
+            </li>
+            <li class="nav-item mx-auto d-block">
+              <a class="nav-link active" aria-current="page" href="#"><h5>Tarifas</h5></a>
+            </li>
+            <li class="nav-item mx-auto d-block">
+              <a class="nav-link active" aria-current="page" href="pagos.html"><h5>Medios de pago</h5></a>
+            </li>
+            <li class="nav-item mx-auto d-block">
+              <a class="nav-link active" aria-current="page" href="#"><h5>Nosotros</h5></a>
+            </li>
+            <li class="nav-item mx-auto d-block">
+              <a class="nav-link active" aria-current="page" href="#"><h5>Contacto</h5></a>
+            </li>
+            </div>
+          </ul>
+          <div class="dropdown dropstart">
+                <button class="btn mx-auto" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="../media/Usuario.png" height="40px">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                  <li><a class="dropdown-item" href="#">Seguridad</a></li>
+                  <li><a class="dropdown-item" href="#">Menú administrador</a></li>
+                  <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+  </nav>
+<br><br><br>
+<div class="container-fluid">
+<div class="row justify-content-center">
+ <div class="col-md-12 col-sm-10 text-center" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+   <h2>Contactanos</h2>
+ </div>
+</div>
+</div>
+<div class="row justify-content-center">
+  <div class="p-1 mb-1" style="width:50%; background-color: #F5B041;">
+</div>
+
+<div class="container-fluid">
+  <br/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-sm-4"></div>
+      <div class="col-md-4 col-sm-1">
+        <div class="d-flex justify-content-center p-2"></div>
+          <div class="p-2">
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Ej: Emiliano" value="" required>
+            </div>
+            <br/>
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Ej: Muñoz" value="" required>
+            </div>
+            <br/>
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label">Email</label>
+              <input type="email" class="form-control" id="validationCustom01" placeholder="Ej: mail@mail.com" value="" required>
+            </div>
+            <br/>
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Ej: 260-000000" value="" required>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Escribí acá tu consulta</label>
+                <textarea class="form-control" id="consulta" rows="3"></textarea>
+            </div>
+          </div>
+          
+        <div class="d-flex justify-content-center m-2">
+          <button class="btn m-2 text-white" style="background-color: #F5B041;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar</button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h5>¡Solicitud enviada con éxito!</h5>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn text-white" style="background-color: #F5B041;" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+
+
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #4C4F62;">
+  <div class="container-fluid">
+    <span class="navbar-text text-white col-sm-3" id="Contacto">
+      <p><h3>Atención al cliente</h3></p>
+      <p>2604-123456</p>
+      <p>contacto@primeparking.com.ar</p>
+      <p>Lun a Vie de 09:00 hs. hasta las 20:00 hs.</p>
+      <p>Sábados de 09:00 hs. hasta las 13:00 hs.</p>
+    </span>
+    <span class="navbar-text text-white col-sm-3 justify-content-center text-center">
+      <p><h3>Seguinos</h3></p>
+      <img src="../media/instagram.png" width="50px" height="50px">
+      <img src="../media/whatsapp.png" width="50px" height="50px">
+    </span>
+    <span class="navbar-text text-white col-sm-3">
+      <a href="#"
+        <button type="button" class="btn"><h5>Preguntas Frecuentes</h5></button>
+      </a>
+      <a href="#"
+        <button type="button" class="btn"><h5>Términos y Condiciones</h5></button>
+      </a>
+      <a href="#"
+      <button type="button" class="btn"><h5>Políticas de Privacidad</h5></button>
+      </a>
+    </span>
+  </div>
+</nav>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+</html>
