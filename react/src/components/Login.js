@@ -17,7 +17,7 @@ const handleLogin = (values) => {
 const handleForm = async(values) => { 
     console.log('values:', values) 
     try { 
-      const response = await axios.post('http://localhost:5000/example/login', values) 
+      const response = await axios.post('http://localhost:5000/auth/login', values) 
       console.log(response.data) 
     } catch (error) { 
     } 
