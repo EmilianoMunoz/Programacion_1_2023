@@ -4,7 +4,12 @@ import parking from '../images/parking foto.jpg';
 export const Cards = () => {
     return (
         <div>
-            <div class="container-fluid col-md-8">
+            <div class="container-fluid col-md-8 mt-5">
+                <div style={{ textAlign: 'center' }}>
+                    <h2>Nuestros establecimientos</h2>
+                    <div style={{ width: '600px', backgroundColor: '#F5B041', height: '5px', margin: 'auto' }}></div>
+                </div>
+                <br></br>
                 <div class="row row-cols-3 row-cols-md-3 g-4">
                     <div class="col">
                         <div class="card text-center h-100 border-warning" style={{ borderRadius: "10px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>

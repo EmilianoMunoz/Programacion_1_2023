@@ -5,7 +5,7 @@ import instagram from '../images/instagram.png';
 export const Footer = () => {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: '#4C4F62'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark mt-5" style={{backgroundColor: '#4C4F62'}}>
                 <div class="container-fluid">
                     <span class="navbar-text text-white col-sm-3" id="Contacto">
                         <p><h3>Atención al cliente</h3></p>

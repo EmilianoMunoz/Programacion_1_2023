@@ -4,9 +4,15 @@ import camara from '../images/cam_estacionamiento.jpg';
 import lavado from '../images/lavado.jpg';
 import '../styles/Carousel.css';
 
+
+
 export const Carousel = () => {
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex flex-column align-items-center mt-5">
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <h2>¿Por qué elegirnos?</h2>
+        <div style={{ width: '600px', backgroundColor: '#F5B041', height: '5px', margin: 'auto' }}></div>
+      </div>
       <div id="carouselExampleAutoplaying" className="carousel slide carousel-container col-md-6" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -49,4 +55,3 @@ export const Carousel = () => {
     </div>
   );
 };
-
