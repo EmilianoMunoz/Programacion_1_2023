@@ -17,4 +17,22 @@ def login():
     else:
         response = {'Mensaje': 'Error'}
         return jsonify(response), 401
+    
+
+@auth.route('/register', methods=['POST'])
+def register():
+    name = request.json['name']
+    email = request.json['email']
+    password = request.json['password']
+    phone = request.json['phone']
+
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
+        response = {'mensaje': 'El correo electrónico ya está registrado.'}
+        return jsonify(response), 400
+
+    user = User(name=name, email=email, password=password, phone=phone)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({'mensaje': 'Usuario registrado con éxito.'}), 201
 

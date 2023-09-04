@@ -1,53 +1,96 @@
-import React from 'react';
-
-
+import axios from 'axios';
+import { Field, Form, Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const Register = () => {
+    const navigate = useNavigate();
+
+    const initialValues = {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phone: '',
+    };
+
+    const handleRegister = async (values) => {
+        if (values.password !== values.confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Las contraseñas no coinciden',
+            });
+            return;
+        }
+
+        try {
+            const response = await axios.post('http://localhost:5000/auth/register', values);
+            console.log(response.data);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Registro exitoso',
+                showConfirmButton: false,
+                timer: 1800,
+            });
+            navigate('/dashboard');
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El correo electrónico ya está registrado',
+                });
+            } else {
+                console.log(error);
+            }
+        }
+    };
+
     return (
         <div>
-            <br></br>
-            <div class="row">
-                <div class="col-md-4 col-sm-1"></div>
-                <div class="col-md-4 col-sm-1 border border-1">
-                    <div style = {{padding: "30px"}}>
+            <br />
+            <div className="row">
+                <div className="col-md-4 col-sm-1"></div>
+                <div className="col-md-4 col-sm-1 border border-1">
+                    <div style={{ padding: "30px" }}>
                         <h2>Registrarse</h2>
-                        <form method="POST">
-                            <input type="hidden" />
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Telefono</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="exampleFormControlInput1"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Confirmar contraseña</label>
-                                <input type="password" class="form-control" id="exampleFormControlInput1"/>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn m-2 text-white" style={{backgroundColor: '#F5B041'}} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrarme</button>
-                            </div>
-                        </form>
+                        <Formik initialValues={initialValues} onSubmit={handleRegister}>
+                            <Form>
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Nombre</label>
+                                    <Field type="text" className="form-control" id="name" name="name" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <Field type="email" className="form-control" id="email" name="email" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="phone" className="form-label">Telefono</label>
+                                    <Field type="text" className="form-control" id="phone" name="phone" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Contraseña</label>
+                                    <Field type="password" className="form-control" id="password" name="password" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña</label>
+                                    <Field type="password" className="form-control" id="confirmPassword" name="confirmPassword" />
+                                </div>
+                                <div className="d-grid gap-2">
+                                    <button type="submit" className="btn m-2 text-white" style={{ backgroundColor: '#F5B041' }}>Registrarme</button>
+                                </div>
+                            </Form>
+                        </Formik>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-1"></div>
+                <div className="col-md-4 col-sm-1"></div>
             </div>
-            
         </div>
     )
 }
 
-export default Register
+export default Register;
+
+
