@@ -11,7 +11,7 @@ def login():
     password = data.get('password')
 
     emailDb = User.query.filter_by(email=email).first()
-    if emailDb and emailDb.passsword == password:
+    if emailDb and emailDb.password == password:
         response = {'Mensaje': 'Inicio sesion correctamente'}
         return jsonify(response), 200
     else:

@@ -7,7 +7,7 @@ export const Navbar = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#4C4F62' }}>
                 <div className="container-fluid">
-                    <Link className="navbar-brand">
+                    <Link className="navbar-brand" to='/home'>
                         <img src={logo} width="250px" height="110px" alt="Logo y nombre" to="/home" />
                     </Link>
 
@@ -31,15 +31,11 @@ export const Navbar = () => {
                                 <Link className="nav-link active" aria-current="page"><h5>Nosotros</h5></Link>
                             </li>
                             <li className="nav-item mx-auto d-block">
-                                <Link className="nav-link active" aria-current="page" to="/login"><h5>Contacto</h5></Link>
+                                <Link className="nav-link active" aria-current="page"><h5>Contacto</h5></Link>
                             </li>
                             <li className="nav-item mx-auto d-block">
-                                <Link
-                                    className="btn text-white" exact='true' style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/login">Ingresar
-                                </Link>
-                                <Link
-                                    className="btn text-white" exact='true' style={{ backgroundColor: '#F5B041', marginBottom: "5px" }} to="/register">Registrarme
-                                </Link>
+                                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/login">Ingresar</Link>
+                                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginBottom: "5px" }} to="/register">Registrarme</Link>
                             </li>
                         </ul>
                     </div>
@@ -48,3 +44,5 @@ export const Navbar = () => {
         </div>
     )
 }
+
+export default Navbar

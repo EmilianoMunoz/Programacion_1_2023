@@ -55,3 +55,5 @@ export const Carousel = () => {
     </div>
   );
 };
+
+export default Carousel;

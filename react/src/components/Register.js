@@ -5,6 +5,7 @@ import React from 'react';
 export const Register = () => {
     return (
         <div>
+            <br></br>
             <div class="row">
                 <div class="col-md-4 col-sm-1"></div>
                 <div class="col-md-4 col-sm-1 border border-1">
@@ -30,11 +31,11 @@ export const Register = () => {
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1"/>
+                                <input type="password" class="form-control" id="exampleFormControlInput1"/>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Confirmar contraseña</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1"/>
+                                <input type="password" class="form-control" id="exampleFormControlInput1"/>
                             </div>
                             <div class="d-grid gap-2">
                                 <button class="btn m-2 text-white" style={{backgroundColor: '#F5B041'}} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrarme</button>
@@ -48,3 +49,5 @@ export const Register = () => {
         </div>
     )
 }
+
+export default Register

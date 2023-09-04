@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Formik, Field} from 'formik';
 import axios from 'axios';
+
 export const Login = () => {
 
 
@@ -25,6 +26,7 @@ const handleForm = async(values) => {
 
     return (
         <div>
+            <br></br>
             <Formik
                 className='formik-selection'
                 initialValues={intialValues}
@@ -54,7 +56,7 @@ const handleForm = async(values) => {
                                     />
                                     
                                     <div className="d-grid gap-2">
-                                        <button className="btn text-white m-2" style={{ backgroundColor: '#F5B041' }} onClick={handleForm} type="submit">Iniciar sesión</button>
+                                        <button className="btn text-white m-2" style={{ backgroundColor: '#F5B041' }} exact='true' to = "/login" >Iniciar sesión</button>
                                     </div>
                                 
                             </div>
@@ -62,7 +64,9 @@ const handleForm = async(values) => {
                     </div>
                 </Form>
             </Formik>
+            <div class="col-md-4 col-sm-1"></div>
         </div>
     )
 }
 
+export default Login

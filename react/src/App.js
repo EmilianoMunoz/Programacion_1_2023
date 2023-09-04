@@ -1,24 +1,25 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
-
-import { Footer } from './components/Footer';
-import { Login } from './components/Login';
-import { Home } from './components/Home';
-import { Navbar } from './components/Navbar';
+import { Routes, Route } from 'react-router-dom';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import Register from './components/Register'
 
 export const App = () => {
   return (
-    <div style={{ backgroundColor: '#eeee' }}>
+    <div style={{ backgroundColor: '#eeee', minHeight: '100vh', position: 'relative' }}>
       <Navbar />
-      <Home />
-      <Footer />
+
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-      <Footer />
+
+      <Footer style={{ position: 'fixed', bottom: '0', width: '100%' }} />
     </div>
   );
 };
