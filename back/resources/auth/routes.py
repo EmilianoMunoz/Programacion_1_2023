@@ -19,6 +19,7 @@ def login():
         return jsonify(response), 401
     
 
+
 @auth.route('/register', methods=['POST'])
 def register():
     name = request.json['name']
