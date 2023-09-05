@@ -28,7 +28,6 @@ export const Register = () => {
             const response = await axios.post('http://localhost:5000/auth/register', values);
             console.log(response.data);
             Swal.fire({
-                position: 'top-end',
                 icon: 'success',
                 title: 'Registro exitoso',
                 showConfirmButton: false,
@@ -59,7 +58,7 @@ export const Register = () => {
                         <Formik initialValues={initialValues} onSubmit={handleRegister}>
                             <Form>
                                 <div className="mb-3">
-                                    <label htmlFor="name" className="form-label">Nombre</label>
+                                    <label htmlFor="name" className="form-label">Nombre y Apellido</label>
                                     <Field type="text" className="form-control" id="name" name="name" />
                                 </div>
                                 <div className="mb-3">
