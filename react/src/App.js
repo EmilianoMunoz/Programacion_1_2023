@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import Login from './components/Login';
-import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Register from './components/Register'
+import { PrivateRoutes } from './routes/PrivateRoutes';
+import { PublicRoutes } from './routes/PublicRoutes';
+import { UserContext } from './context/UserContext';
 
 export const App = () => {
+  const [user, setUser] = useState({
+    role: '',
+    logged: false,
+  });
+
   return (
     <div style={{ backgroundColor: '#eeee', minHeight: '100vh', position: 'relative' }}>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-
-      <Footer style={{ position: 'fixed', bottom: '0', width: '100%' }} />
+      <UserContext.Provider value={{ user, setUser }}>
+        <Navbar />
+        <Routes>
+          {user.logged ? (
+            <Route path="/*" element={<PrivateRoutes />} />
+          ) : (
+            <Route path="/*" element={<PublicRoutes />} />
+          )}
+        </Routes>
+      </UserContext.Provider>
+      <Footer />
     </div>
   );
 };

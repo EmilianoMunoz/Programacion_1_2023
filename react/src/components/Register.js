@@ -27,13 +27,19 @@ export const Register = () => {
         try {
             const response = await axios.post('http://localhost:5000/auth/register', values);
             console.log(response.data);
+            const { role } = response.data
+            console.log('role', role)
             Swal.fire({
                 icon: 'success',
                 title: 'Registro exitoso',
                 showConfirmButton: false,
                 timer: 1800,
             });
-            navigate('/dashboard');
+            setUser({
+                logged:true,
+                role: role
+            })
+            navigate('/offers');
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 Swal.fire({
