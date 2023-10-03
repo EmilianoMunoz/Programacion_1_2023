@@ -40,3 +40,5 @@ def register():
     db.session.commit()
     return jsonify(role=role), 200
 
+    
+
