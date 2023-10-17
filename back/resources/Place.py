@@ -6,8 +6,8 @@ from database import db
 class PlaceList(Resource):
     
     def post(self):
-        availabity = request.json['availabity']
-        parking = request.json['parking']
+        availabity = request.json.get('availabity')
+        parking = request.json.get('parking')
         
         place = Place(availabity=availabity, parking=parking)
 

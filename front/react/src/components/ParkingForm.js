@@ -56,9 +56,9 @@ export const ParkingForm = () => {
                                     <label htmlFor="parking" className="form-label">Elija el parking</label>
                                     <Field as="select" className="form-select" id="parking" name="parking">
                                         <option value="">Seleccionar Parking</option>
-                                        <option value="parking1">Parking 1</option>
-                                        <option value="parking2">Parking 2</option>
-                                        <option value="parking3">Parking 3</option>
+                                        <option value="san_martin">San Martín</option>
+                                        <option value="francia">Francia</option>
+                                        <option value="plaza_esp">Plaza España</option>
                                     </Field>
                                 </div>
                                 <div className="d-grid gap-2">

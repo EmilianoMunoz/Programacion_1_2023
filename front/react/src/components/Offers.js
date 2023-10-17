@@ -1,6 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const tableContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '80%',
+    margin: '0 auto',
+};
+
+const searchContainerStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: '20px',
+};
+
+const searchInputStyle = {
+    flex: 1, // Hace que el campo de búsqueda ocupe el espacio restante
+    marginRight: '10px', // Añade un margen a la derecha del campo de búsqueda
+};
+
 const tableStyle = {
     border: '1px solid #ccc',
     borderCollapse: 'collapse',
@@ -22,6 +44,7 @@ const tdStyle = {
 
 export const Offers = () => {
     const [parkingData, setParkingData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchParkingData = async () => {
@@ -39,18 +62,41 @@ export const Offers = () => {
 
     const handleDeleteParking = async (id) => {
         try {
-          
             await axios.delete(`http://localhost:5000/parkingform/${id}`);
-            
             setParkingData((prevData) => prevData.filter((parking) => parking.id !== id));
         } catch (error) {
             console.error('Error al eliminar el estacionamiento', error);
         }
     };
 
+    const filteredParkingData = parkingData.filter((parking) =>
+        parking.parking.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div>
+        <div style={tableContainerStyle}>
             <h1>Plazas de Estacionamiento Disponibles</h1>
+
+            <div style={searchContainerStyle}>
+                {/* Campo de búsqueda */}
+                <input
+                    type="text"
+                    placeholder="Buscar por parking"
+                    className="form-control"
+                    style={searchInputStyle} // Aplicamos el estilo al campo de búsqueda
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+
+                {/* Botón para borrar el campo de búsqueda */}
+                <button
+                    className="btn btn-secondary"
+                    onClick={() => setSearchTerm('')}
+                >
+                    Borrar
+                </button>
+            </div>
+
             <table style={tableStyle}>
                 <thead>
                     <tr>
@@ -61,13 +107,18 @@ export const Offers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {parkingData.map((parking) => (
+                    {filteredParkingData.map((parking) => (
                         <tr key={parking.id}>
                             <td style={tdStyle}>{parking.id}</td>
                             <td style={tdStyle}>{parking.availabity ? 'Disponible' : 'Ocupado'}</td>
                             <td style={tdStyle}>{parking.parking}</td>
                             <td style={tdStyle}>
-                                <button onClick={() => handleDeleteParking(parking.id)}>Eliminar</button>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => handleDeleteParking(parking.id)}
+                                >
+                                    Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -76,5 +127,3 @@ export const Offers = () => {
         </div>
     );
 };
-
-
