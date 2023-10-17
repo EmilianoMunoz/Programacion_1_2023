@@ -25,6 +25,8 @@ export const App = () => {
           )}
         </Routes>
       </UserContext.Provider>
+      
+      
       <Footer />
     </div>
   );

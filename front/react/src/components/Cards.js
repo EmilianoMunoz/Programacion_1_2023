@@ -34,7 +34,7 @@ export const Cards = () => {
                         <div class="card text-center h-100 border-warning" style={{ borderRadius: "10px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
                             <img src={parking} class="card-img-top" alt="foto: parking" width="500px"/>
                             <div class="card-body">
-                            <h3 class="card-title">Parking San Martín</h3>
+                            <h3 class="card-title">Parking Francia</h3>
                             <p class="card-text">Frente al hospital central de la ciudad y a 10 minutos del centro, este estacionamiento cuenta con más de 50 cocheras para su comodidad y rápida atención.</p>
                             <br/><br/>
                             <div class="position-absolute fixed-bottom mb-1">

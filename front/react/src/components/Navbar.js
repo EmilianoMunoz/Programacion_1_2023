@@ -35,6 +35,9 @@ export const Navbar = () => {
                                 <li className="nav-item mx-auto d-block">
                                     <Link className="nav-link active" aria-current="page" to='/userList'><h5>Usuarios</h5></Link>
                                 </li>
+                                <li className="nav-item mx-auto d-block">
+                                    <Link className="nav-link active" aria-current="page" to='/parkingform'><h5>Crear estacionamiento</h5></Link>
+                                </li>
                             </ul>
                         ) : user.role === '2' ? (
                             <ul className="navbar-nav w-100 justify-content-between align-items-end">
