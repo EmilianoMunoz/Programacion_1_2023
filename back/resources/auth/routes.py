@@ -27,7 +27,7 @@ def register():
     email = request.json['email']
     password = request.json['password']
     phone = request.json['phone']
-    role = '1'
+    role = '2'
     print(name, email, phone, password, role)
 
     existing_user = User.query.filter_by(email=email).first()

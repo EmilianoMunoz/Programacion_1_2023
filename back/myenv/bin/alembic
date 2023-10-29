@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/emiliano/Escritorio/Programacion I - 2023/repo flor/programacionProyectoFinal/back/myenv/bin/python3" "$0" "$@"
+'''exec' "/home/emiliano/Escritorio/Programacion I - 2023/Programacion_1_2023/back/myenv/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

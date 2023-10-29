@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request, jsonify
-from models.User import User  # Asegúrate de importar el modelo User correcto
+from models.User import User
 from database import db
 
 class UserList(Resource):

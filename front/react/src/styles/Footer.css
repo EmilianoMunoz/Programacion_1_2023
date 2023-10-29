@@ -1,0 +1,11 @@
+/* Estilo para el footer */
+.footer {
+    background-color: #4C4F62; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Alineación de texto al centro */
+    position: fixed; /* El footer se mantendrá fijo en la parte inferior de la ventana del navegador */
+    bottom: 0; /* Coloca el footer en la parte inferior de su contenedor */
+    width: 100%; /* Asegura que el footer tenga el 100% del ancho de su contenedor */
+  }
+  

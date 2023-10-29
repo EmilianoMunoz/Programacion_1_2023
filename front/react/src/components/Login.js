@@ -35,7 +35,7 @@ export const Login = () => {
           logged:true,
           role: role
         })
-        navigate('/offers')
+        navigate('/home')
       } else {
         
         Swal.fire({

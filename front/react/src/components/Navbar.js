@@ -5,7 +5,6 @@ import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 
 export const Navbar = () => {
-
     const { user, setUser } = useContext(UserContext);
 
     const handleLogOut = () => {
@@ -26,44 +25,39 @@ export const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-
-                        {user.role === '1' ? (
-                            <ul className="navbar-nav w-100 justify-content-between align-items-end">
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page" to='/offers'><h5>Estacionamientos</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page" to='/userList'><h5>Usuarios</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page" to='/parkingform'><h5>Crear estacionamiento</h5></Link>
-                                </li>
-                            </ul>
-                        ) : user.role === '2' ? (
-                            <ul className="navbar-nav w-100 justify-content-between align-items-end">
-                                <li className="nav-item rounded mx-auto d-block sm-2">
-                                    <Link className="nav-link active" aria-current="page" to="/reservas"><h5>Reservas</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page"><h5>Membresías</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page"><h5>Medios de pago</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page"><h5>Nosotros</h5></Link>
-                                </li>
-                                <li className="nav-item mx-auto d-block">
-                                    <Link className="nav-link active" aria-current="page"><h5>Contacto</h5></Link>
-                                </li>
-                            </ul>
-                        ) : (
-                            
+                        <ul className="navbar-nav w-100 justify-content-between align-items-end">
                             <li className="nav-item mx-auto d-block">
-                                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/login">Ingresar</Link>
-                                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginBottom: "5px" }} to="/register">Registrarme</Link>
+                                <Link className="nav-link active" aria-current="page"><h5>Medios de pago</h5></Link>
                             </li>
-                        )}
+                            <li className="nav-item mx-auto d-block">
+                                <Link className="nav-link active" aria-current="page"><h5>Nosotros</h5></Link>
+                            </li>
+                            <li className="nav-item mx-auto d-block">
+                                <Link className="nav-link active" aria-current="page"><h5>Contacto</h5></Link>
+                            </li>
+                            {user && user.role === '1' && (
+                                <li className="nav-item mx-auto d-block">
+                                    <Link className="nav-link active" aria-current="page" to='/dashboard'><h5>Panel</h5></Link>
+                                </li>
+                            )}
+                            {user && user.role === '2' && (
+                                <li className="nav-item mx-auto d-block">
+                                    <Link className="nav-link active" aria-current="page" to='/reserves'><h5>Reservas</h5></Link>
+                                </li>
+                            )}
+                            {user ? (
+                                <li className="nav-item mx-auto d-block">
+                                    <button className="btn text-white" style={{ backgroundColor: '#F5B041' }} onClick={handleLogOut}>
+                                        Cerrar Sesión
+                                    </button>
+                                </li>
+                            ) : (
+                                <li className="nav-item mx-auto d-block">
+                                    <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/login">Ingresar</Link>
+                                    <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginBottom: "5px" }} to="/register">Registrarme</Link>
+                                </li>
+                            )}
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -72,3 +66,4 @@ export const Navbar = () => {
 }
 
 export default Navbar;
+
