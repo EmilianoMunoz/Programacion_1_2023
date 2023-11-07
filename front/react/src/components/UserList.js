@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const tableContainerStyle = {
     display: 'flex',
@@ -45,6 +46,7 @@ const tdStyle = {
 export const UserList = () => {
     const [userData, setUserData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -69,14 +71,21 @@ export const UserList = () => {
         }
     };
 
+    const handleEditUser = (id) => {
+        
+        navigate(`/useredit/${id}`);
+    };
+
+
     const filteredUserData = userData.filter((user) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div style={tableContainerStyle}>
-            <h1>Lista de Usuarios</h1>
-
+            <h1 style={{ marginTop: '20px' }}>Lista de Usuarios</h1>
+            <div style={{ width: '600px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
+            
             <div style={searchContainerStyle}>
                 <input
                     type="text"
@@ -112,7 +121,14 @@ export const UserList = () => {
                             <td style={tdStyle}>{user.email}</td>
                             <td style={tdStyle}>
                                 <button
-                                    className="btn btn-danger"
+                                    className="btn btn-warning text-white" style={{marginRight:'10px'}}
+                                    onClick={() => handleEditUser(user.id)}
+                                >
+                                    Editar
+                                </button>
+
+                                <button
+                                    className="btn btn-danger" 
                                     onClick={() => handleDeleteUser(user.id)}
                                 >
                                     Eliminar
@@ -125,3 +141,5 @@ export const UserList = () => {
         </div>
     );
 };
+
+export default UserList;

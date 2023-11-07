@@ -12,9 +12,10 @@ def login():
 
     emailDb = User.query.filter_by(email=email).first()
     role = emailDb.role
+    idUser = emailDb.id
     if emailDb and emailDb.password == password:
         response = {'Mensaje': 'Inicio sesion correctamente'}
-        return jsonify(role=role), 200
+        return jsonify(role=role, idUser=idUser), 200
     else:
         response = {'Mensaje': 'Error'}
         return jsonify(response), 401
@@ -38,7 +39,10 @@ def register():
     user = User(name=name, email=email, password=password, phone=phone, role=role)
     db.session.add(user)
     db.session.commit()
-    return jsonify(role=role), 200
+
+    registeredEmail = User.query.filter_by(email=email).first()
+    idUser = registeredEmail.id
+    return jsonify(role=role, idUser=idUser), 200
 
     
 

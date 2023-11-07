@@ -8,6 +8,8 @@ class User(db.Model):
     password = db.Column(db.String(250))
     role = db.Column(db.String(250))
     
+    userReserve = db.relationship("Reserve", backref='user')
+
     def __str__(self):
         return(
             f'id: {self.id}, '

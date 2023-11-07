@@ -6,10 +6,10 @@ from database import db
 class PlaceList(Resource):
     
     def post(self):
-        availabity = request.json.get('availabity')
+        availability = request.json.get('availability')
         parking = request.json.get('parking')
         
-        place = Place(availabity=availabity, parking=parking)
+        place = Place(availability=availability, parking=parking)
 
         db.session.add(place)
         db.session.commit()
@@ -21,7 +21,7 @@ class PlaceList(Resource):
         for place in places:
             result.append({
                 'id': place.id,
-                'availabity': place.availabity,
+                'availability': place.availability,
                 'parking': place.parking
             })
         response = jsonify(result)

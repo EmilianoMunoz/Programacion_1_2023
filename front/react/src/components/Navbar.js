@@ -45,7 +45,7 @@ export const Navbar = () => {
                                     <Link className="nav-link active" aria-current="page" to='/reserves'><h5>Reservas</h5></Link>
                                 </li>
                             )}
-                            {user ? (
+                            {user.logged ? (
                                 <li className="nav-item mx-auto d-block">
                                     <button className="btn text-white" style={{ backgroundColor: '#F5B041' }} onClick={handleLogOut}>
                                         Cerrar Sesión

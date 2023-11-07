@@ -1,16 +1,22 @@
 from database import db 
+from datetime import datetime
+
 
 class Reserve(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('user.id'))
     placeId = db.Column(db.Integer, db.ForeignKey('place.id'))
-    startTime = db.Column(db.DateTime)  # Fecha y hora de inicio
-    endTime = db.Column(db.DateTime)    # Fecha y hora de finalización
-    totalCost = db.Column(db.Float)     # Precio Total
-    status = db.Column(db.String(20))   # Estado de la reserva
+    startTime = db.Column(db.DateTime) 
+    endTime = db.Column(db.DateTime)    
+    totalCost = db.Column(db.Float)     
+    status = db.Column(db.String(20))   
 
-    userReserve = db.relationship("User", backref='reserve')
-    userPlace = db.relationship("Place", backref='reserve')
+    def update_status(self):
+        current_time = datetime.now()
+        if current_time >= self.endTime:
+            self.status = "finalizado"
+        else:
+            self.status = "en curso"
 
     def __str__(self):
         return (

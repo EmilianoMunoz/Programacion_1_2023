@@ -20,8 +20,7 @@ export const Login = () => {
     try {
       const response = await axios.post('http://localhost:5000/auth/login', values);
       console.log(response.data);
-      const { role } = response.data
-      console.log('role', role)
+      const { role, idUser } = response.data
 
       if (response.status === 200) {
         Swal.fire({
@@ -33,7 +32,8 @@ export const Login = () => {
         });
         setUser({
           logged:true,
-          role: role
+          role: role,
+          id: idUser
         })
         navigate('/home')
       } else {
@@ -66,8 +66,10 @@ export const Login = () => {
           <div className='row'>
             <div className='col-md-4 col-sm-1'></div>
             <div className='col-md-4 col-sm-1 border border-1'>
-              <div style={{ padding: '30px' }}>
+              <div style={{ padding: '30px', textAlign: 'center' }}>
                 <h2>Iniciar Sesión</h2>
+                <div style={{ width: '535px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
+
 
                 <Field
                   type='email'
@@ -92,7 +94,7 @@ export const Login = () => {
                     exact='true'
                     to='/login'
                   >
-                    Iniciar sesión
+                    Ingresar
                   </button>
                 </div>
               </div>

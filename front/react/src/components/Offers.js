@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const tableContainerStyle = {
     display: 'flex',
@@ -19,8 +20,8 @@ const searchContainerStyle = {
 };
 
 const searchInputStyle = {
-    flex: 1, // Hace que el campo de búsqueda ocupe el espacio restante
-    marginRight: '10px', // Añade un margen a la derecha del campo de búsqueda
+    flex: 1, 
+    marginRight: '10px',
 };
 
 const tableStyle = {
@@ -75,20 +76,20 @@ export const Offers = () => {
 
     return (
         <div style={tableContainerStyle}>
-            <h1>Plazas de Estacionamiento Disponibles</h1>
-
+            <h1 style={{ marginTop: '20px' }}>Plazas de estacionamiento</h1>
+            <div style={{ width: '600px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
             <div style={searchContainerStyle}>
-                {/* Campo de búsqueda */}
+                
                 <input
                     type="text"
                     placeholder="Buscar por parking"
                     className="form-control"
-                    style={searchInputStyle} // Aplicamos el estilo al campo de búsqueda
+                    style={searchInputStyle} 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
 
-                {/* Botón para borrar el campo de búsqueda */}
+                
                 <button
                     className="btn btn-secondary"
                     onClick={() => setSearchTerm('')}
@@ -110,7 +111,7 @@ export const Offers = () => {
                     {filteredParkingData.map((parking) => (
                         <tr key={parking.id}>
                             <td style={tdStyle}>{parking.id}</td>
-                            <td style={tdStyle}>{parking.availabity ? 'Disponible' : 'Ocupado'}</td>
+                            <td style={tdStyle}>{parking.availabity ? 'Ocupado' : 'Disponible'}</td>
                             <td style={tdStyle}>{parking.parking}</td>
                             <td style={tdStyle}>
                                 <button
@@ -122,6 +123,9 @@ export const Offers = () => {
                             </td>
                         </tr>
                     ))}
+        <Link to="/parkingform" className="btn btn-primary" style={{ marginTop: '20px' }}>
+            Crear plaza de estacionamiento
+        </Link>
                 </tbody>
             </table>
         </div>

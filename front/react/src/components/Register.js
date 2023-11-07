@@ -31,8 +31,7 @@ export const Register = () => {
         try {
             const response = await axios.post('http://localhost:5000/auth/register', values);
             console.log(response.data);
-            const { role } = response.data
-            console.log('role', role)
+            const { role, idUser } = response.data
             Swal.fire({
                 icon: 'success',
                 title: 'Registro exitoso',
@@ -41,9 +40,10 @@ export const Register = () => {
             });
             setUser({
                 logged:true,
-                role: role
+                role: role,
+                id: idUser
             })
-            navigate('/offers');
+            navigate('/home');
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 Swal.fire({
@@ -63,8 +63,11 @@ export const Register = () => {
             <div className="row">
                 <div className="col-md-4 col-sm-1"></div>
                 <div className="col-md-4 col-sm-1 border border-1">
-                    <div style={{ padding: "30px" }}>
-                        <h2>Registrarse</h2>
+                    <div style={{ padding: "30px"}}>
+                        <div style={{textAlign: 'center'}}>
+                        <h2>Formulario de registro</h2>
+                        <div style={{ width: '535px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
+                        </div>
                         <Formik initialValues={initialValues} onSubmit={handleRegister}>
                             <Form>
                                 <div className="mb-3">

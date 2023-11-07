@@ -6,13 +6,13 @@ const panelStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    paddingTop: '20px', // Añade un espacio superior al texto
+    paddingTop: '20px',
 };
 
 const buttonContainerStyle = {
     display: 'flex',
-    justifyContent: 'center', // Alinea los botones horizontalmente
-    marginTop: '20px', // Añade un espacio superior a los botones
+    justifyContent: 'center', 
+    marginTop: '20px', 
 };
 
 const buttonStyle = {
@@ -22,13 +22,14 @@ const buttonStyle = {
     margin: '5px',
     borderRadius: '5px',
     fontSize: '18px',
-    textDecoration: 'none', // Elimina el subrayado del texto
+    textDecoration: 'none', 
 };
 
 const Dashboard = () => {
     return (
         <div style={panelStyle}>
             <h1>Panel de Administración</h1>
+            <div style={{ width: '600px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
             <div style={buttonContainerStyle}>
                 <Link to="/offers" style={buttonStyle}>
                     Estacionamientos
@@ -36,7 +37,7 @@ const Dashboard = () => {
                 <Link to="/userlist" style={buttonStyle}>
                     Usuarios
                 </Link>
-                <Link to="/reservas" style={buttonStyle}>
+                <Link to="/reservelist" style={buttonStyle}>
                     Reservas
                 </Link>
             </div>
