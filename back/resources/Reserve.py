@@ -16,12 +16,7 @@ class ReservesList(Resource):
         
         user = User.query.get(userId)
         place = Place.query.get(placeId)
-        if place:
-            place.availability = False
-            db.session.commit()
-        else:
-            return jsonify({'message': 'Lugar no encontrado'}), 404
-
+       
         reserve = ReserveModel()
         reserve.user = user
         reserve.place = place
@@ -29,7 +24,7 @@ class ReservesList(Resource):
         reserve.endTime = endTime
         reserve.totalCost = totalCost
         reserve.status = "en curso" 
-
+        place.availability = False
         db.session.add(reserve)
         db.session.commit()
         return jsonify({'mensaje': 'Reserva agregada con éxito.'})

@@ -42,6 +42,21 @@ const tdStyle = {
     padding: '8px',
     textAlign: 'left',
 };
+const buttonStyle = {
+    backgroundColor: '#F5B041',
+    color: 'white',
+    padding: '10px 20px',
+    margin: '5px',
+    borderRadius: '5px',
+    fontSize: '18px',
+    textDecoration: 'none', 
+};
+const centerButtonContainer = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '20px', 
+};
 
 export const Offers = () => {
     const [parkingData, setParkingData] = useState([]);
@@ -111,7 +126,7 @@ export const Offers = () => {
                     {filteredParkingData.map((parking) => (
                         <tr key={parking.id}>
                             <td style={tdStyle}>{parking.id}</td>
-                            <td style={tdStyle}>{parking.availabity ? 'Ocupado' : 'Disponible'}</td>
+                            <td style={tdStyle}>{parking.availability ? 'Disponible' : 'Ocupado'}</td>
                             <td style={tdStyle}>{parking.parking}</td>
                             <td style={tdStyle}>
                                 <button
@@ -123,11 +138,12 @@ export const Offers = () => {
                             </td>
                         </tr>
                     ))}
-        <Link to="/parkingform" className="btn btn-primary" style={{ marginTop: '20px' }}>
-            Crear plaza de estacionamiento
-        </Link>
+                    
                 </tbody>
             </table>
+            <Link to="/parkingform" style={buttonStyle}>
+                Crear plaza de estacionamiento
+            </Link>
         </div>
     );
 };
