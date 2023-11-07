@@ -32,41 +32,55 @@ class ReservesList(Resource):
 
     def get(self):
         reserves = db.session.query(ReserveModel).all()
+        
+        if not reserves:
+            
+            return jsonify({'mensaje': 'No se encontraron reservas'}), 404
+
         result = []
         for reserve in reserves:
-            result.append({
-                'id': reserve.id,
-                'userId': reserve.user.id,
-                'userName': reserve.user.name,
-                'placeId': reserve.place.id,
-                'placeName': reserve.place.parking,
-                'startTime': reserve.startTime,
-                'endTime': reserve.endTime,
-                'totalCost': reserve.totalCost,
-                'status': reserve.status
-            })
+            if reserve.user and reserve.place:
+                result.append({
+                    'id': reserve.id,
+                    'userId': reserve.user.id,
+                    'userName': reserve.user.name,
+                    'placeId': reserve.place.id,
+                    'placeName': reserve.place.parking,
+                    'startTime': reserve.startTime,
+                    'endTime': reserve.endTime,
+                    'totalCost': reserve.totalCost,
+                    'status': reserve.status
+                })
+
         response = jsonify(result)
         response.status_code = 200
         return response
+
 
 class Reserve(Resource):
 
     def get(self, id):
         user = User.query.get(id)
-         
         
-         
+        if user is None:
+            return jsonify({'mensaje': 'Usuario no encontrado'}), 404
+
         reserves = ReserveModel.query.filter_by(user=user).all()
 
         result = []
         for reserve in reserves:
             place = Place.query.get(reserve.placeId)
+            if place is None:
+                # Maneja el caso en el que no se encuentra un lugar correspondiente
+                # Puedes devolver una respuesta de error o manejarlo según tus requisitos.
+                continue
+
             result.append({
                 'id': reserve.id,
                 'userId': user.id,
                 'userName': user.name,
-                'placeId': reserve.place.id,
-                'placeName': reserve.place.parking,
+                'placeId': place.id,
+                'placeName': place.parking,
                 'startTime': reserve.startTime,
                 'endTime': reserve.endTime,
                 'totalCost': reserve.totalCost,
@@ -74,4 +88,5 @@ class Reserve(Resource):
             })
 
         return jsonify(result)
+
 

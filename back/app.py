@@ -11,6 +11,7 @@ from models import ReserveModel
 from resources.Place import PlaceList
 from resources.User import UserList, User
 from resources.Reserve import ReservesList, Reserve
+from models import PlaceModel
 
 app = Flask(__name__)
 api = Api(app)
@@ -29,7 +30,7 @@ api.add_resource(PlaceList, '/parkingform', endpoint='parkingform')
 api.add_resource(PlaceList, '/parkingform/<int:id>', '/parkingform/<int:id>/', endpoint='parkingform_id')
 
 api.add_resource(UserList, '/userlist')
-api.add_resource(User, '/userlist/<int:id>', '/userlist/<int:id>/', endpoint='user_id')
+api.add_resource(User, '/user/<int:id>', '/user/<int:id>/', endpoint='user_id')
 
 @app.route('/reserves', methods=['OPTIONS'])
 def handle_options():
@@ -55,7 +56,8 @@ def update_reservation_statuses():
 
 def reset_availability():
     current_time = datetime.now()
-    places_to_reset = PlaceList.query.filter(PlaceList.availability == False, PlaceList.reservations.any(ReserveModel.endTime <= current_time)).all()
+    places_to_reset = PlaceModel.query.filter(PlaceModel.availability == False, PlaceModel.reservations.any(ReserveModel.endTime <= current_time)).all()
+
     for place in places_to_reset:
         place.availability = True
 scheduler.add_job(reset_availability, 'interval', minutes=1)

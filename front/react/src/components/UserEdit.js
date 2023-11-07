@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const containerStyle = {
   display: 'flex',
@@ -22,22 +23,44 @@ const formStyle = {
 };
 
 export const UserEdit = () => {
-  const { userId } = useParams();
-  const [userData, setUserData] = useState({});
+  const { id } = useParams();
+  const [userData, setUserData] = useState([]);
+  const [editedUser, setEditedUser] = useState({ id: 0, name: '', email: '', phone: '', password: '' });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/userlist/${userId}`);
-        const data = response.data;
-        setUserData(data);
-      } catch (error) {
-        console.error('Error al obtener los datos del usuario', error);
-      }
-    };
+    fetchUser();
+  }, [id]);
 
-    fetchUserData();
-  }, [userId]);
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/user/${id}`);
+      const data = response.data;
+      setEditedUser(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedUser({ ...editedUser, [name]: value });
+  };
+
+  const handleUpdateUser = async () => {
+    try {
+      await axios.put(`http://localhost:5000/user/${id}`, editedUser);
+      Swal.fire({
+        icon: 'success',
+        title: 'Editado correctamente',
+        showConfirmButton: false,
+        timer: 1800,
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div style={containerStyle}>
@@ -45,16 +68,15 @@ export const UserEdit = () => {
         <div style={formStyle}>
           <h1>Editar Usuario</h1>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="email" className="form-label">
               Nombre y Apellido
             </label>
             <input
               type="text"
               className="form-control"
-              id="name"
               name="name"
-              value={userData.name || ''}
-              readOnly 
+              value={editedUser.name}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-3">
@@ -64,10 +86,9 @@ export const UserEdit = () => {
             <input
               type="email"
               className="form-control"
-              id="email"
               name="email"
-              value={userData.email || ''}
-              readOnly
+              value={editedUser.email}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-3">
@@ -77,10 +98,9 @@ export const UserEdit = () => {
             <input
               type="text"
               className="form-control"
-              id="phone"
               name="phone"
-              value={userData.phone || ''}
-              readOnly
+              value={editedUser.phone}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-3">
@@ -90,12 +110,14 @@ export const UserEdit = () => {
             <input
               type="password"
               className="form-control"
-              id="password"
               name="password"
-              value={userData.password || ''}
-              readOnly
+              value={editedUser.password}
+              onChange={handleInputChange}
             />
           </div>
+          <button className="btn btn-primary" onClick={handleUpdateUser}>
+            Guardar Cambios
+          </button>
         </div>
       </div>
     </div>

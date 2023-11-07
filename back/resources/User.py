@@ -39,9 +39,38 @@ class User(Resource):
         return response
 
     def put(self, id):
+        user = db.session.query(UserModel).filter_by(id=id).first()
         
-        pass
+        if user is None:
+            response = jsonify({"message": "Usuario no encontrado"})
+            response.status_code = 404
+            return response
+
+        
+        data = request.get_json()  
+        
+        
+        if 'name' in data:
+            user.name = data['name']
+        if 'email' in data:
+            user.email = data['email']
+        if 'phone' in data:
+            user.phone = data['phone']
+        if 'password' in data:
+            user.password = data['password']
+        
+        db.session.commit()
+
+        response = jsonify({"message": "Usuario actualizado exitosamente"})
+        response.status_code = 200
+        return response
+
 
     def delete(self, id):
-        
-        pass
+        user = db.session.query(UserModel).filter_by(id=id).first()
+        db.session.delete(user)
+        db.session.commit()
+        if user is None:
+            response = jsonify({"message": "Usuario no encontrado"})
+            response.status
+
