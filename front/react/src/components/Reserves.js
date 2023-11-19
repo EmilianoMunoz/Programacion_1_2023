@@ -3,7 +3,6 @@ import parking from '../images/parking foto.jpg';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { format } from 'date-fns';
 
 export const Reserves = () => {
 
@@ -44,9 +43,6 @@ export const Reserves = () => {
             <img src={parking} className="card-img-top" alt={'foto: parking'} style={{ maxWidth: "500px" }} />
             <div className="card-body">
               <h3 className="card-title">Parking San Martín</h3>
-              <div>
-                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/confirmationreserve">Reservar</Link>
-              </div>
             </div>
           </div>
         </div>
@@ -55,9 +51,7 @@ export const Reserves = () => {
             <img src={parking} className="card-img-top" alt={'foto: parking'} style={{ maxWidth: "500px" }} />
             <div className="card-body">
               <h3 className="card-title">Parking Francia</h3>
-              <div>
-                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/confirmationreserve">Reservar</Link>
-              </div>
+
             </div>
           </div>
         </div>
@@ -66,39 +60,45 @@ export const Reserves = () => {
             <img src={parking} className="card-img-top" alt={'foto: parking'} style={{ maxWidth: "500px" }} />
             <div className="card-body">
               <h3 className="card-title">Parking Plaza España</h3>
-              <div>
-                <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginRight: "5px", marginBottom: "5px" }} to="/confirmationreserve">Reservar</Link>
-              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Link className="btn text-white" style={{ backgroundColor: '#F5B041', marginTop: "20px", marginBottom: '50px', width: '100%' }} to="/confirmationreserve">Reservar</Link>
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <h1>Mis Reservas</h1>
         <div style={{ width: '100%', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
       </div>
-      <table className="table">
-        <thead>
+      <table className="table table-striped">
+        <thead class="table-light">
           <tr>
             <th scope="col">Parking</th>
             <th scope="col">Fecha de Inicio</th>
+            <th scope="col">Hora de Inicio</th>
             <th scope="col">Fecha de Fin</th>
+            <th scope="col">Hora de Fin</th>
             <th scope="col">Precio</th>
             <th scope="col">Estado</th>
           </tr>
         </thead>
+        
         <tbody>
           {reserves.map((reserve) => (
             <tr key={reserve.id}>
-                <td>{reserve.placeName}</td>
-                <td>{format(new Date(reserve.startTime), 'HH:mm dd/MM/yyyy ')}</td>
-                <td>{format(new Date(reserve.endTime), 'HH:mm dd/MM/yyyy ')}</td>
-                <td>${reserve.totalCost}</td>
-                <td>{reserve.status}</td>
+              <td>{reserve.placeName}</td>
+              <td>{new Date(reserve.startTime).toLocaleDateString('es-ES', { timeZone: 'Europe/Lisbon' })}</td>
+              <td>{new Date(reserve.startTime).toLocaleTimeString('es-ES', { timeZone: 'Europe/Lisbon', hour: 'numeric', minute: 'numeric' })}</td>
+              <td>{new Date(reserve.endTime).toLocaleDateString('es-ES', { timeZone: 'Europe/Lisbon' })}</td>
+              <td>{new Date(reserve.endTime).toLocaleTimeString('es-ES', { timeZone: 'Europe/Lisbon', hour: 'numeric', minute: 'numeric' })}</td>
+              <td>${reserve.totalCost}</td>
+              <td>{reserve.status}</td>
             </tr>
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };

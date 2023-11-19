@@ -71,8 +71,6 @@ class Reserve(Resource):
         for reserve in reserves:
             place = Place.query.get(reserve.placeId)
             if place is None:
-                # Maneja el caso en el que no se encuentra un lugar correspondiente
-                # Puedes devolver una respuesta de error o manejarlo según tus requisitos.
                 continue
 
             result.append({

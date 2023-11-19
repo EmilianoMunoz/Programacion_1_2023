@@ -62,10 +62,10 @@ export const Login = () => {
         initialValues={initialValues}
         onSubmit={handleForm}
       >
-        <Form className='form-formik'>
+        <Form className='form-formik' style={{marginBottom: '300px'}}>
           <div className='row'>
             <div className='col-md-4 col-sm-1'></div>
-            <div className='col-md-4 col-sm-1 border border-1'>
+            <div className='col-md-4 col-sm-1'>
               <div style={{ padding: '30px', textAlign: 'center' }}>
                 <h2>Iniciar Sesión</h2>
                 <div style={{ width: '535px', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>

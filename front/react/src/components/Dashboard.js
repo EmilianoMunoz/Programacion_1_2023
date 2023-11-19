@@ -7,6 +7,8 @@ const panelStyle = {
     alignItems: 'center',
     textAlign: 'center',
     paddingTop: '20px',
+    marginTop: '50px',
+    marginBottom: '360px'
 };
 
 const buttonContainerStyle = {

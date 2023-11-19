@@ -7,7 +7,7 @@ const containerStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '100vh',
+  height: '75vh',
 };
 
 const formContainerStyle = {
@@ -66,7 +66,10 @@ export const UserEdit = () => {
     <div style={containerStyle}>
       <div style={formContainerStyle}>
         <div style={formStyle}>
-          <h1>Editar Usuario</h1>
+          <div style={{margin: 'auto', textAlign: 'center'}}>
+            <h1>Editar Usuario</h1>
+            <div style={{ width: '100%', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>
+          </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Nombre y Apellido
@@ -115,7 +118,7 @@ export const UserEdit = () => {
               onChange={handleInputChange}
             />
           </div>
-          <button className="btn btn-primary" onClick={handleUpdateUser}>
+          <button className="btn text-white" style={{ backgroundColor: '#F5B041'}} onClick={handleUpdateUser}>
             Guardar Cambios
           </button>
         </div>

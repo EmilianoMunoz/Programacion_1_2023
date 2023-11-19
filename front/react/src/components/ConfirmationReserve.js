@@ -134,7 +134,7 @@ const ConfirmationReserve = () => {
 
 
   return (
-    <div className="container" style={{ width: '50%', marginTop: '50px' }}>
+    <div className="container" style={{ width: '50%', marginTop: '50px', marginBottom: '100px' }}>
       <div style={{ textAlign: 'center' }}>
           <h1>Confirmación de Reserva</h1>
           <div style={{ width: '100%', backgroundColor: '#F5B041', height: '5px', margin: 'auto', marginBottom: '20px' }}></div>
@@ -189,7 +189,7 @@ const ConfirmationReserve = () => {
         <div style={{ textAlign: 'center' }}>
           <button
             type="button"
-            className="btn btn-warning text-white"
+            className="btn text-white" style={{backgroundColor: '#F5B041'}}
             onClick={() => handleConfirmReservation()}
           >
             Confirmar Reserva
