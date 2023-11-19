@@ -16,18 +16,25 @@ class ReservesList(Resource):
         
         user = User.query.get(userId)
         place = Place.query.get(placeId)
-       
-        reserve = ReserveModel()
-        reserve.user = user
-        reserve.place = place
-        reserve.startTime = startTime
-        reserve.endTime = endTime
-        reserve.totalCost = totalCost
-        reserve.status = "en curso" 
-        place.availability = False
-        db.session.add(reserve)
-        db.session.commit()
-        return jsonify({'mensaje': 'Reserva agregada con éxito.'})
+
+        if place and place.availability:
+            reserve = ReserveModel()
+            reserve.user = user
+            reserve.place = place
+            reserve.startTime = startTime
+            reserve.endTime = endTime
+            reserve.totalCost = totalCost
+            reserve.status = "en curso" 
+            place.availability = False
+            db.session.add(reserve)
+            db.session.commit()
+
+            reserve.update_status()
+
+            return jsonify({'mensaje': 'Reserva agregada con éxito.'})
+        else:
+            return jsonify({'mensaje': 'No hay plaza disponible en este momento.'}), 400
+
     
 
     def get(self):

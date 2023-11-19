@@ -15,6 +15,7 @@ class Reserve(db.Model):
         current_time = datetime.now()
         if current_time >= self.endTime:
             self.status = "finalizado"
+            self.place.availability = True
         else:
             self.status = "en curso"
 

@@ -23,7 +23,7 @@ export const ReserveList = () => {
 
 
     return (
-        <div className="container-fluid col-md-8 mt-5" style={{marginBottom: '90px'}}>
+        <div className="container-fluid col-md-8 mt-5" style={{marginBottom: '170px'}}>
             <div style={{ textAlign: 'center', marginTop: '20px'}}>
                 <h1>Historial Reservas</h1>
                 <div style={{ width: '100%', backgroundColor: '#F5B041', height: '5px', marginBottom: '20px' }}></div>

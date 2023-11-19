@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import jsPDF from 'jspdf';
 
 const ConfirmationReserve = () => {
   const [parkingOption, setParkingOption] = useState('san_martin');
@@ -31,11 +32,18 @@ const ConfirmationReserve = () => {
       const response = await axios.get('http://localhost:5000/parkingform');
       const allPlaces = response.data;
       const selectedPlace = allPlaces.find(place => place.parking === parkingOption);
-  
+
       if (selectedPlace) {
         setPlace(selectedPlace);
       } else {
         console.error('No se encontró un lugar para el parking seleccionado.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No hay lugar en el parking seleccionado.',
+        });
+        // Puedes limpiar el lugar seleccionado en el estado si es necesario
+        setPlace(null);
       }
     } catch (error) {
       console.error(error);
@@ -66,54 +74,51 @@ const ConfirmationReserve = () => {
     }
   };
 
-  
-
-  
   const handleConfirmReservation = async () => {
-    if (place) {
-      const selectedPrice = prices[parkingOption];
-      const durationInHours = parseFloat(hoursOption);
-      const currentTime = new Date();
+    try {
+      if (place) {
+        const selectedPrice = prices[parkingOption];
+        const durationInHours = parseFloat(hoursOption);
+        const currentTime = new Date();
   
-      let endTime;
-      switch (hoursOption) {
-        case '1':
-          endTime = new Date(currentTime.getTime() + durationInHours * 60 * 60 * 1000);
-          break;
-        case 'turno':
-          endTime = new Date(currentTime.getTime() + 4 * 60 * 60 * 1000);
-          break;
-        case 'medio-dia':
-          endTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000);
-          break;
-        case 'dia-completo':
-          endTime = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
-          break;
-        default:
-          endTime = currentTime;
-      }
+        let endTime;
+        switch (hoursOption) {
+          case '1':
+            endTime = new Date(currentTime.getTime() + durationInHours * 60 * 60 * 1000);
+            break;
+          case 'turno':
+            endTime = new Date(currentTime.getTime() + 4 * 60 * 60 * 1000);
+            break;
+          case 'medio-dia':
+            endTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000);
+            break;
+          case 'dia-completo':
+            endTime = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
+            break;
+          default:
+            endTime = currentTime;
+        }
   
-      const formatDateTime = (date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-      };
+        const formatDateTime = (date) => {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          const hours = String(date.getHours()).padStart(2, '0');
+          const minutes = String(date.getMinutes()).padStart(2, '0');
+          const seconds = String(date.getSeconds()).padStart(2, '0');
+          return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        };
   
-      const values = {
-        userId: user.id,
-        placeId: place.id,
-        startTime: formatDateTime(currentTime),
-        endTime: formatDateTime(endTime),
-        totalCost: calculateTotalPrice(),
-      };
+        const values = {
+          userId: user.id,
+          placeId: place.id,
+          startTime: formatDateTime(currentTime),
+          endTime: formatDateTime(endTime),
+          totalCost: calculateTotalPrice(),
+        };
   
-      console.log('Objeto values:', values);
+        console.log('Objeto values:', values);
   
-      try {
         const response = await axios.post('http://localhost:5000/reserveslist', values);
         console.log(response.data);
         Swal.fire({
@@ -122,12 +127,47 @@ const ConfirmationReserve = () => {
           showConfirmButton: false,
           timer: 1800,
         });
+        generatePDF();
         navigate('/reserves');
-      } catch (error) {
-        console.error(error);
+      } else {
+        console.error('No se ha seleccionado un lugar.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se ha seleccionado un lugar.',
+        });
       }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No hay lugares disponibles en este parking.',
+      });
+    }
+  };
+  
+
+  const generatePDF = () => {
+    if (place) {
+      const doc = new jsPDF();
+
+      doc.text('Confirmación de Reserva', 20, 10);
+      doc.text('----------------------------', 20, 15);
+      doc.text(`Parking: ${parkingOption}`, 20, 30);
+      doc.text(`Duración: ${hoursOption}`, 20, 45);
+      doc.text(`Precio Total: $${calculateTotalPrice()}`, 20, 60);
+      doc.text('Gracias por utilizar nuestros servicios.', 20, 300);
+
+      const fileName = `Reserva_${user.id}_${place.id}_${Date.now()}.pdf`;
+      doc.save(fileName);
     } else {
       console.error('No se ha seleccionado un lugar.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se ha seleccionado un lugar.',
+      });
     }
   };
   
@@ -187,13 +227,16 @@ const ConfirmationReserve = () => {
           />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <button
-            type="button"
-            className="btn text-white" style={{backgroundColor: '#F5B041'}}
-            onClick={() => handleConfirmReservation()}
-          >
-            Confirmar Reserva
-          </button>
+        <button
+          type="button"
+          className="btn text-white"
+          style={{ backgroundColor: '#F5B041' }}
+          onClick={() => {
+            handleConfirmReservation();
+          }}
+        >
+          Confirmar Reserva
+        </button>
         </div>
       </form>
     </div>
